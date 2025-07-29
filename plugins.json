@@ -1,0 +1,40 @@
+[
+    {
+        "iconUrl": "https://raw.githubusercontent.com/rockhero1234/cinephile/refs/heads/master/BingedReview/icon.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rockhero1234/cinephile",
+        "fileSize": 13293,
+        "status": 1,
+        "authors": [
+            "Dilip"
+        ],
+        "tvTypes": [
+            "Movie"
+        ],
+        "version": 1,
+        "internalName": "BingedReview",
+        "description": "Data about streaming and review",
+        "url": "https://raw.githubusercontent.com/rockhero1234/cinephile/builds/BingedReview.cs3",
+        "name": "BingedReview"
+    },
+    {
+        "iconUrl": "https://cinedoze.com/wp-content/uploads/2024/05/CineDoze.Com-Logo.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rockhero1234/cinephile",
+        "fileSize": 12278,
+        "status": 1,
+        "language": "hi",
+        "authors": [
+            "Dilip"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "version": 1,
+        "internalName": "Cinedoze",
+        "description": "Movies & Series",
+        "url": "https://raw.githubusercontent.com/rockhero1234/cinephile/builds/Cinedoze.cs3",
+        "name": "Cinedoze"
+    }
+]
