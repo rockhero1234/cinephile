@@ -78,7 +78,7 @@ class BingedProvider : MainAPI() {
         )
     }
 
-   fun findTrailer(query: String): String? {
+   suspend fun findTrailer(query: String): String? {
         val encodedQuery = URLEncoder.encode("$query trailer", "UTF-8")
         val url = "$invidUrl/api/v1/search?q=$encodedQuery&page=1&type=video&fields=videoId"
     
