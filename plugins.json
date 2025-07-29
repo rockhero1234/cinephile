@@ -1,0 +1,61 @@
+[
+    {
+        "iconUrl": "https://raw.githubusercontent.com/rockhero1234/cinephile/refs/heads/master/BingedReview/icon.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rockhero1234/cinephile",
+        "fileSize": 13296,
+        "status": 1,
+        "authors": [
+            "Dilip"
+        ],
+        "tvTypes": [
+            "Movie"
+        ],
+        "version": 3,
+        "internalName": "BingedReview",
+        "description": "Data about streaming and review",
+        "url": "https://raw.githubusercontent.com/rockhero1234/cinephile/builds/BingedReview.cs3",
+        "name": "BingedReview"
+    },
+    {
+        "iconUrl": "https://cinedoze.com/wp-content/uploads/2024/05/CineDoze.Com-Logo.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rockhero1234/cinephile",
+        "fileSize": 12278,
+        "status": 1,
+        "language": "hi",
+        "authors": [
+            "Dilip"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "version": 1,
+        "internalName": "Cinedoze",
+        "description": "Movies & Series",
+        "url": "https://raw.githubusercontent.com/rockhero1234/cinephile/builds/Cinedoze.cs3",
+        "name": "Cinedoze"
+    },
+    {
+        "iconUrl": "https://skymovieshd.diy/images/logo2.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rockhero1234/cinephile",
+        "fileSize": 14676,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Redowan"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries",
+            "NSFW"
+        ],
+        "version": 1,
+        "internalName": "SkymoviesHD",
+        "description": "480p, 720p, 1080p Full Movies In SkymoviesHD",
+        "url": "https://raw.githubusercontent.com/rockhero1234/cinephile/builds/SkymoviesHD.cs3",
+        "name": "SkymoviesHD"
+    }
+]
