@@ -18,7 +18,7 @@ class BingedProvider : MainAPI() {
     override var lang = "en"
     override val hasMainPage = true
     val invidUrl= "https://invd.cakestwix.com"
-    private suspend fun getData(titled: String, i: Int, fltr: String = ""): List<MovieSearchResponse> {
+    private suspend fun getData(titled: String, i: Int, platform: String = "",fltr:String=""): List<MovieSearchResponse> {
         val j = if (i == 1) 0 else 21 + (i - 2) * 20
         var data = mutableMapOf(
                 "filters[recommend]" to "false",
@@ -31,10 +31,12 @@ class BingedProvider : MainAPI() {
                 "length" to "20",
                 "customcatalog" to "0"
         )
-       if(fltr.isNotEmpty()){
-            data["filters[platform][]"] = fltr
+       if(platform.isNotEmpty()){
+            data["filters[platform][]"] = platform
        }
-
+       if(fltr.isNotEmpty()){
+            data["filters[recommendation][]"] = fltr
+       }
         val response = app.post(
             "$mainUrl/wp-admin/admin-ajax.php",
             data = data,
@@ -64,16 +66,16 @@ class BingedProvider : MainAPI() {
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val stsoon = getData("streaming-soon", page)
         val stnow = getData("streaming-now", page)
-        val nt = getData("streaming-now", page,"Netflix")
-        val prime = getData("streaming-now", page,"Amazon")
-        val jioh = getData("streaming-now", page,"Jio Hotstar")
+        val mustwatchlist = getData("streaming-now", page,fltr="Must_Watch")
+        val goodlist = getData("streaming-now", page,fltr="Good")
+        val satisfylist = getData("streaming-now", page,fltr="Satisfactory")
         return newHomePageResponse(
             listOf(
                 HomePageList("Streaming Soon", stsoon, false),
                 HomePageList("Streaming Now", stnow, false),
-                HomePageList("Netflix", nt, false),
-                HomePageList("PrimeVideo", prime, false),
-                HomePageList("Hotstar", jioh, false),
+                HomePageList("Must Watch", mustwatchlist, false),
+                HomePageList("Good", goodlist, false),
+                HomePageList("Satisfactory", satisfylist, false),
             ), true
         )
     }
