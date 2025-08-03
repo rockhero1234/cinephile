@@ -172,7 +172,7 @@ override suspend fun load(url: String): LoadResponse? {
         doc.selectFirst("span.single-mevents-platforms-row-date")?.text(),
         doc.selectFirst("div.our-rating > span.rating-span")?.text() ?: "No Review",
         doc.selectFirst("img.single-mevents-platforms-row-image")?.attr("alt"),
-        doc.selectFirst("span.audiostring")?.text(),
+        doc.selectFirst("span.audiostring")?.text() ?: doc.selectFirst("span.single-mevents-platforms-row-language")?.text(),
         dtsplit.getOrNull(1)?.trim(),
         dtsplit.getOrNull(2)?.trim(),
         dtsplit.getOrNull(3)?.trim()
