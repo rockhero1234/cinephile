@@ -169,6 +169,7 @@ override suspend fun load(url: String): LoadResponse? {
 }.filterNotNull()
     
     val tags = listOfNotNull(
+        doc.selectFirst("div.single-mevents-categories")?.text(),
         doc.selectFirst("span.single-mevents-platforms-row-date")?.text(),
         doc.selectFirst("div.our-rating > span.rating-span")?.text() ?: "No Review",
         doc.selectFirst("img.single-mevents-platforms-row-image")?.attr("alt"),
