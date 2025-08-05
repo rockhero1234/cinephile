@@ -32,7 +32,7 @@ class SkymoviesHDProvider : MainAPI() { // all providers must be an instance of 
     // enable this when your provider has a main page
     override val hasMainPage = true
     override val hasDownloadSupport = true
-    override val hasQuickSearch = false
+    //override val hasQuickSearch = false
 
     override val mainPage = mainPageOf(
         "Bollywood-Movies" to "Bollywood Movies",
