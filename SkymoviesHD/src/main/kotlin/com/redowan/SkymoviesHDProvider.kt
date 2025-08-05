@@ -20,6 +20,7 @@ import com.lagradost.cloudstream3.newEpisode
 import com.lagradost.cloudstream3.newTvSeriesLoadResponse
 import com.lagradost.cloudstream3.utils.loadExtractor
 import com.lagradost.cloudstream3.utils.newExtractorLink
+import android.util.Log
 
 class SkymoviesHDProvider : MainAPI() { // all providers must be an instance of MainAPI
     override var mainUrl = "https://skymovieshd.credit"
@@ -42,6 +43,7 @@ class SkymoviesHDProvider : MainAPI() { // all providers must be an instance of 
     override suspend fun getMainPage(
         page: Int, request: MainPageRequest
     ): HomePageResponse {
+        Log.d("link","$mainUrl/category/${request.data}/${page}.html")
         val doc = app.get(
             "$mainUrl/category/${request.data}/${page}.html").document
         val homeResponse = doc.select("div.L")
