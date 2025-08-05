@@ -43,7 +43,7 @@ class SkymoviesHDProvider : MainAPI() { // all providers must be an instance of 
         page: Int, request: MainPageRequest
     ): HomePageResponse {
         val doc = app.get(
-            "$mainUrl/category/${request.data}/2.html").document
+            "$mainUrl/category/${request.data}/${page}.html").document
         val homeResponse = doc.select("div.L")
         val home = homeResponse.mapNotNull { post ->
             toResult(post)
