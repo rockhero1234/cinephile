@@ -36,35 +36,14 @@ class SkymoviesHDProvider : MainAPI() { // all providers must be an instance of 
 
     override val mainPage = mainPageOf(
         "Bollywood-Movies" to "Bollywood Movies",
-        "Bangladeshi-Movies" to "Bangladeshi Movies",
-        "South-Indian-Hindi-Dubbed-Movies" to "South Indian Hindi Dubbed Movies",
-        "Bengali-Movies" to "Bengali Movies",
-        "Pakistani-Movies" to "Pakistani Movies",
-        "Hollywood-English-Movies" to "Hollywood English Movies",
-        "Hollywood-Hindi-Dubbed-Movies" to "Hollywood Hindi Dubbed Movies",
-        "Tamil-Movies" to "Tamil Movies",
-        "Telugu-Movies" to "Telugu Movies",
-        "Punjabi-Movies" to "Punjabi Movies",
-        "Bhojpuri-Movies" to "Bhojpuri Movies",
-        "Marathi-Movies" to "Marathi Movies",
-        "Kannada-Movies" to "Kannada Movies",
-        "WWE-TV-Shows" to "WWE TV Shows",
-        "TV-Serial-Episodes" to "TV Serial Episodes",
-        "Gujrati-Movies-" to "Gujrati Movies",
-        "Malayalam-Movies" to "Malayalam Movies",
-        "Korean-and-China-Movies" to "Korean and China Movies",
-        "Movies-Trailer" to "Movies Trailer",
-        "Hot-Short-Film" to "Hot Short Film",
-        "All-Web-Series" to "All Web Series",
-        "Regional-Movies" to "Regional Movies"
+        "All-Web-Series" to "All Web Series"
     )
 
     override suspend fun getMainPage(
         page: Int, request: MainPageRequest
     ): HomePageResponse {
         val doc = app.get(
-            "$mainUrl/category/${request.data}/$page.html", cacheTime = 60
-        ).document
+            "$mainUrl/category/${request.data}/$page.html").document
         val homeResponse = doc.select("div.L")
         val home = homeResponse.mapNotNull { post ->
             toResult(post)
