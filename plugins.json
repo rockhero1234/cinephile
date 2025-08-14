@@ -1,0 +1,60 @@
+[
+    {
+        "iconUrl": "https://raw.githubusercontent.com/rockhero1234/cinephile/refs/heads/master/BingedReview/icon.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rockhero1234/cinephile",
+        "fileSize": 15001,
+        "status": 1,
+        "authors": [
+            "Dilip"
+        ],
+        "tvTypes": [
+            "Movie"
+        ],
+        "version": 1,
+        "internalName": "BingedReview",
+        "description": "Data about streaming and review",
+        "url": "https://raw.githubusercontent.com/rockhero1234/cinephile/builds/BingedReview.cs3",
+        "name": "BingedReview"
+    },
+    {
+        "iconUrl": "https://1cinevood.agency/wp-content/uploads/2020/07/cvlogo.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rockhero1234/cinephile",
+        "fileSize": 22889,
+        "status": 1,
+        "language": "hi",
+        "authors": [
+            "Dilip"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "version": 1,
+        "internalName": "Cinevood",
+        "description": "unstable right now but good regional content",
+        "url": "https://raw.githubusercontent.com/rockhero1234/cinephile/builds/Cinevood.cs3",
+        "name": "Cinevood"
+    },
+    {
+        "iconUrl": "https://i.postimg.cc/FRwFFtyT/logo.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rockhero1234/cinephile",
+        "fileSize": 12738,
+        "status": 1,
+        "language": "ta",
+        "authors": [
+            "Dilip"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "version": 3,
+        "internalName": "Tamilblasters",
+        "description": "Movies & Series",
+        "url": "https://raw.githubusercontent.com/rockhero1234/cinephile/builds/Tamilblasters.cs3",
+        "name": "Tamilblasters"
+    }
+]
