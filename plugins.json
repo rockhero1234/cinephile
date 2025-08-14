@@ -1,0 +1,40 @@
+[
+    {
+        "iconUrl": "https://raw.githubusercontent.com/rockhero1234/cinephile/refs/heads/master/BingedReview/icon.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rockhero1234/cinephile",
+        "fileSize": 13293,
+        "status": 1,
+        "authors": [
+            "Dilip"
+        ],
+        "tvTypes": [
+            "Movie"
+        ],
+        "version": 1,
+        "internalName": "BingedReview",
+        "description": "Data about streaming and review",
+        "url": "https://raw.githubusercontent.com/rockhero1234/cinephile/builds/BingedReview.cs3",
+        "name": "BingedReview"
+    },
+    {
+        "iconUrl": "https://i.postimg.cc/FRwFFtyT/logo.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rockhero1234/cinephile",
+        "fileSize": 12733,
+        "status": 1,
+        "language": "ta",
+        "authors": [
+            "Dilip"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "version": 2,
+        "internalName": "Tamilblasters",
+        "description": "Movies & Series",
+        "url": "https://raw.githubusercontent.com/rockhero1234/cinephile/builds/Tamilblasters.cs3",
+        "name": "Tamilblasters"
+    }
+]
