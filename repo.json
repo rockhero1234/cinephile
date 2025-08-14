@@ -1,8 +1,0 @@
-{
-    "name": "Cinephile",
-    "description": "Your Cloudstream Repo",
-    "manifestVersion": 1,
-    "pluginLists": [
-      "https://raw.githubusercontent.com/rockhero1234/cinephile/builds/plugins.json"
-    ]
-}
