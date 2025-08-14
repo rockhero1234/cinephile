@@ -1,0 +1,102 @@
+[
+    {
+        "iconUrl": "https://raw.githubusercontent.com/rockhero1234/cinephile/refs/heads/master/BingedReview/icon.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rockhero1234/cinephile",
+        "fileSize": 17968,
+        "status": 1,
+        "authors": [
+            "Dilip"
+        ],
+        "tvTypes": [
+            "Movie"
+        ],
+        "version": 3,
+        "internalName": "BingedReview",
+        "description": "Data about streaming and review",
+        "url": "https://raw.githubusercontent.com/rockhero1234/cinephile/builds/BingedReview.cs3",
+        "name": "BingedReview"
+    },
+    {
+        "iconUrl": "https://i.ibb.co/nMdxZgkR/8-CM3-5q-ARZYELDWg6-Erqfg-NYpo-Sdh-Yw-HRB5-CMhf-Vgg-Ygn-PMHCVYWQf-EEJMt9gwd6-EFP5t-LYgd-LAm-Zerm-KCX.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rockhero1234/cinephile",
+        "fileSize": 33966,
+        "status": 1,
+        "language": "hi",
+        "authors": [
+            "Dilip"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "version": 11,
+        "internalName": "Cinevood",
+        "description": "unstable right now but good regional content",
+        "url": "https://raw.githubusercontent.com/rockhero1234/cinephile/builds/Cinevood.cs3",
+        "name": "Cinevood"
+    },
+    {
+        "iconUrl": "https://i.ibb.co/v4VNd4bf/mp4moviez-2025.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rockhero1234/cinephile",
+        "fileSize": 13867,
+        "status": 1,
+        "language": "hi",
+        "authors": [
+            "salman731"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries",
+            "NSFW"
+        ],
+        "version": 1,
+        "internalName": "Mp4Moviez",
+        "description": "Download Mp4Moviez free full movies, high quality movies, latest movies from Mp4Moviez. Mp4moviez is number one entertainment hollywood bollywood website and provide free Mp4moviez full movie download facility",
+        "url": "https://raw.githubusercontent.com/rockhero1234/cinephile/builds/Mp4Moviez.cs3",
+        "name": "Mp4Moviez"
+    },
+    {
+        "iconUrl": "https://skymovieshd.mba/images/logo2.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rockhero1234/cinephile",
+        "fileSize": 23971,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Redowan"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries",
+            "NSFW"
+        ],
+        "version": 1,
+        "internalName": "SkymoviesHD",
+        "description": "just testing",
+        "url": "https://raw.githubusercontent.com/rockhero1234/cinephile/builds/SkymoviesHD.cs3",
+        "name": "SkymoviesHD"
+    },
+    {
+        "iconUrl": "https://i.postimg.cc/FRwFFtyT/logo.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rockhero1234/cinephile",
+        "fileSize": 14757,
+        "status": 1,
+        "language": "ta",
+        "authors": [
+            "Dilip"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "version": 3,
+        "internalName": "Tamilblasters",
+        "description": "Movies & Series",
+        "url": "https://raw.githubusercontent.com/rockhero1234/cinephile/builds/Tamilblasters.cs3",
+        "name": "Tamilblasters"
+    }
+]

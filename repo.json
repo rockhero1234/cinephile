@@ -1,0 +1,9 @@
+{
+    "name": "Cinephile",
+    "iconUrl":"https://i.ibb.co/M51qxST1/20250814-005735.png",
+    "description": "Your Cloudstream Repo",
+    "manifestVersion": 1,
+    "pluginLists": [
+      "https://raw.githubusercontent.com/rockhero1234/cinephile/builds/plugins.json"
+    ]
+}
