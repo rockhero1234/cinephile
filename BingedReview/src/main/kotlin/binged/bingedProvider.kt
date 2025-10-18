@@ -167,10 +167,9 @@ override suspend fun load(url: String): LoadResponse? {
         null
     }
 }.filterNotNull()
-    
+    val review = doc.selectFirst("div.our-rating > span.rating-span")?.text() ?: "No Review"
     val tags = listOfNotNull(
         doc.selectFirst("span.single-mevents-platforms-row-date")?.text(),
-        doc.selectFirst("div.our-rating > span.rating-span")?.text() ?: "No Review",
         doc.selectFirst("img.single-mevents-platforms-row-image")?.attr("alt"),
         doc.selectFirst("span.audiostring")?.text(),
         dtsplit.getOrNull(1)?.trim(),
@@ -185,6 +184,7 @@ override suspend fun load(url: String): LoadResponse? {
         this.tags = tags
         this.actors = actors
         addTrailer(trailer)
+        this.contentRating = review
     }
 }
 
