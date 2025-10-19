@@ -1,4 +1,4 @@
-package com.megix
+package com.cinephile.cinevood
 
 import android.content.Context
 import com.lagradost.cloudstream3.plugins.CloudstreamPlugin
