@@ -2,7 +2,7 @@
 version = 1
 
 cloudstream {
-    description ="Movie and series"
+    description ="unstable right now but good regional content"
     authors = listOf("Dilip")
 
     /**
