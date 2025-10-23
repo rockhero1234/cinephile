@@ -62,6 +62,28 @@ class BingedProvider : MainAPI() {
             }
         } ?: emptyList()
     }
+    private suspend fun getWeekendPicks(): List<MovieLoadResponse> {
+    val alllistdoc = app.get("https://www.binged.com/ranked-lists/").document
+    val latestlist = alllistdoc.selectFirst("div.ranked-lists-row a").attr("href")
+    val document = app.get(latestlist).document
+    val scriptTag = document.select("script[type='text/lazyscript']").firstOrNull()
+    val rawScript = scriptTag?.data()
+
+    val jsonRaw = Regex("ListFromCookie\\s*=\\s*(\\[.*?\\]);").find(rawScript ?: "")?.groupValues?.get(1)
+    val jsonArray = JSONArray(jsonRaw ?: "[]")
+
+    return List(jsonArray.length()) { i ->
+        val item = jsonArray.getJSONObject(i)
+        val title = item.optString("title")
+        val url = item.optString("movie_link")
+        val image = item.optString("big-image")
+        val date = item.optString("streaming-date")
+
+        newMovieLoadResponse(title, url, TvType.Movie) {
+            this.posterUrl = image
+        }
+    }
+    }
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val stsoon = getData("streaming-soon", page)
