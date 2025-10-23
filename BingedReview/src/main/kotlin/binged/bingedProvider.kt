@@ -62,15 +62,16 @@ class BingedProvider : MainAPI() {
             }
         } ?: emptyList()
     }
-   private suspend fun getWeekendPicks(): List<MovieSearchResponse> {
+   
+private suspend fun getWeekendPicks(): List<SearchResponse> {
     val alllistdoc = app.get("https://www.binged.com/ranked-lists/").document
-    val latestlist = alllistdoc.selectFirst("div.ranked-lists-row a").attr("href")
+    val latestlist = alllistdoc.selectFirst("div.ranked-lists-row a")?.attr("href") ?: return emptyList()
     val document = app.get(latestlist).document
     val scriptTag = document.select("script[type='text/lazyscript']").firstOrNull()
-    val rawScript = scriptTag?.data()
+    val rawScript = scriptTag?.data() ?: return emptyList()
 
-    val jsonRaw = Regex("ListFromCookie\\s*=\\s*(\\[.*?\\]);").find(rawScript ?: "")?.groupValues?.get(1)
-    val jsonArray = JSONArray(jsonRaw ?: "[]")
+    val jsonRaw = Regex("ListFromCookie\\s*=\\s*(\\[.*?\\]);").find(rawScript)?.groupValues?.get(1) ?: return emptyList()
+    val jsonArray = JSONArray(jsonRaw)
 
     return List(jsonArray.length()) { index ->
         val item = jsonArray.getJSONObject(index)
@@ -83,8 +84,7 @@ class BingedProvider : MainAPI() {
             posterUrl = item.optString("big-image")
         }
     }
-   }  
-
+}
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val stsoon = getData("streaming-soon", page)
         val stnow = getData("streaming-now", page)
