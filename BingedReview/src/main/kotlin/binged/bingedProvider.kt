@@ -63,7 +63,8 @@ class BingedProvider : MainAPI() {
         } ?: emptyList()
     }
    
-private suspend fun getWeekendPicks(): List<SearchResponse> {
+private suspend fun getWeekendPicks(page:Int): List<SearchResponse> {
+    if(page==2) return emptyList()
     val alllistdoc = app.get("$mainUrl/ranked-lists/").document
     val latestlist = alllistdoc.selectFirst("div.ranked-lists-row a")?.attr("href") ?: return emptyList()
     val document = app.get("$mainUrl$latestlist").document
@@ -91,7 +92,7 @@ return List(jsonArray.length()) { index ->
         val mustwatchlist = getData("streaming-now", page,fltr="Must_Watch")
         val goodlist = getData("streaming-now", page,fltr="Good")
         val satisfylist = getData("streaming-now", page,fltr="Satisfactory")
-        val weekendPick= getWeekendPicks()
+        val weekendPick= getWeekendPicks(page)
         return newHomePageResponse(
             listOf(
                 HomePageList("Weekend Picks",weekendPick, false),
