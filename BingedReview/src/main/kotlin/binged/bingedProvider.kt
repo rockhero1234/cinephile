@@ -62,7 +62,7 @@ class BingedProvider : MainAPI() {
             }
         } ?: emptyList()
     }
-    private suspend fun getWeekendPicks(): List<MovieLoadResponse> {
+   private suspend fun getWeekendPicks(): List<SearchResponse> {
     val alllistdoc = app.get("https://www.binged.com/ranked-lists/").document
     val latestlist = alllistdoc.selectFirst("div.ranked-lists-row a").attr("href")
     val document = app.get(latestlist).document
@@ -72,18 +72,18 @@ class BingedProvider : MainAPI() {
     val jsonRaw = Regex("ListFromCookie\\s*=\\s*(\\[.*?\\]);").find(rawScript ?: "")?.groupValues?.get(1)
     val jsonArray = JSONArray(jsonRaw ?: "[]")
 
-    return List(jsonArray.length()) { i ->
-        val item = jsonArray.getJSONObject(i)
-        val title = item.optString("title")
-        val url = item.optString("movie_link")
-        val image = item.optString("big-image")
-        val date = item.optString("streaming-date")
+    return List(jsonArray.length()) { index ->
+        val item = jsonArray.getJSONObject(index)
 
-        newMovieLoadResponse(title, url, TvType.Movie) {
-            this.posterUrl = image
+        newMovieSearchResponse(
+            name = item.optString("title"),
+            url = item.optString("movie_link"),
+            type = TvType.Movie
+        ) {
+            posterUrl = item.optString("big-image")
         }
     }
-    }
+   }  
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val stsoon = getData("streaming-soon", page)
@@ -91,13 +91,15 @@ class BingedProvider : MainAPI() {
         val mustwatchlist = getData("streaming-now", page,fltr="Must_Watch")
         val goodlist = getData("streaming-now", page,fltr="Good")
         val satisfylist = getData("streaming-now", page,fltr="Satisfactory")
+        val weekendPick= getWeekendPicks()
         return newHomePageResponse(
             listOf(
+                HomePageList("Weekend Picks",weekendPick, false)
                 HomePageList("Streaming Soon", stsoon, false),
                 HomePageList("Streaming Now", stnow, false),
                 HomePageList("Must Watch", mustwatchlist, false),
                 HomePageList("Good", goodlist, false),
-                HomePageList("Satisfactory", satisfylist, false),
+                HomePageList("Satisfactory", satisfylist, false)
             ), true
         )
     }
