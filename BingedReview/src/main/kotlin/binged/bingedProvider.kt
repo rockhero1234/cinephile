@@ -94,7 +94,7 @@ class BingedProvider : MainAPI() {
         val weekendPick= getWeekendPicks()
         return newHomePageResponse(
             listOf(
-                HomePageList("Weekend Picks",weekendPick, false)
+                HomePageList("Weekend Picks",weekendPick, false),
                 HomePageList("Streaming Soon", stsoon, false),
                 HomePageList("Streaming Now", stnow, false),
                 HomePageList("Must Watch", mustwatchlist, false),
