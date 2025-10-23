@@ -64,9 +64,9 @@ class BingedProvider : MainAPI() {
     }
    
 private suspend fun getWeekendPicks(): List<SearchResponse> {
-    val alllistdoc = app.get("https://www.binged.com/ranked-lists/").document
+    val alllistdoc = app.get("$mainUrl/ranked-lists/").document
     val latestlist = alllistdoc.selectFirst("div.ranked-lists-row a")?.attr("href") ?: return emptyList()
-    val document = app.get(latestlist).document
+    val document = app.get("$mainUrl$latestlist").document
     val scriptTag = document.select("script[type='text/lazyscript']").firstOrNull()
     val rawScript = scriptTag?.data() ?: return emptyList()
 
