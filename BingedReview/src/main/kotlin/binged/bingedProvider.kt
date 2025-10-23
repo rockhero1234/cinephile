@@ -64,7 +64,7 @@ class BingedProvider : MainAPI() {
     }
    
 private suspend fun getWeekendPicks(page:Int): List<SearchResponse> {
-    if(page==2) return emptyList()
+    if(page>1) return emptyList()
     val alllistdoc = app.get("$mainUrl/ranked-lists/").document
     val latestlist = alllistdoc.selectFirst("div.ranked-lists-row a")?.attr("href") ?: return emptyList()
     val document = app.get("$mainUrl$latestlist").document
