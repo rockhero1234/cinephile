@@ -175,10 +175,9 @@ override suspend fun load(url: String): LoadResponse? {
     val dt = doc.select("div.single-mevents-meta").text()
     val dtsplit = dt.split("|")
     val imageUrl = doc.selectFirst("meta[property=og:image]")?.attr("content").orEmpty()
-    val trailer = findTrailer(title) ?: ""
     val plot = doc.selectFirst("p")?.text().orEmpty()
     val year = dtsplit.getOrNull(0)?.trim()?.toIntOrNull()
-
+    val trailer = findTrailer("$title $year") ?: ""
     val actors = doc.select("div.single-castItem").map {
     val name = it.selectFirst("div.single-castItem-name")?.text()
     val imgelement = it.selectFirst("div.single-castItem-image")
