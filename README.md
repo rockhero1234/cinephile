@@ -11,13 +11,13 @@ Cloud Stream ( To install : [View Docs](https://recloudstream.github.io/csdocs/)
 
 ### To Install Repo
 
-1) Direct Install : [Install Cinephile](https://cutt.ly/cscinephile)
+1) Direct Install : [Install Cinephile](cloudstreamrepo://raw.githubusercontent.com/rockhero1234/cinephile/refs/heads/builds/repo.json)
 
-2) Short code : cscinephile
+2) Short code : cinephilecs
 
 3) Manual Install (Copy and Paste in add Repo of Cloud Stream) :
 
-        https://raw.githubusercontent.com/rockhero1234/cinephile/refs/heads/master/repo.json
+        https://raw.githubusercontent.com/rockhero1234/cinephile/refs/heads/builds/repo.json
 
 ### License
 [![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](http://www.gnu.org/licenses/gpl-3.0.en.html)
