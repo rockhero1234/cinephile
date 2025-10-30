@@ -11,7 +11,7 @@ Cloud Stream ( To install : [View Docs](https://recloudstream.github.io/csdocs/)
 
 ### To Install Repo
 
-1) Direct Install : [Install Cinephile](https://cutt.ly/drStFI9j)
+1) Direct Install : [Install Cinephile](https://cutt.ly/cinephiledirect)
 
 2) Short code : cinephilecs
 
