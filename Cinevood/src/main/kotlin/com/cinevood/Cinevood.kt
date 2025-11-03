@@ -74,7 +74,7 @@ class Cinevood : MainAPI() {
             title = it.name ?: title
             description = it.description ?: description
             posterUrl = it.poster ?: posterUrl
-            backgroundUrl = it.background ?: backgroundUrl
+            backgroundUrl = it.background ?: posterUrl
         }
 
         val isMovie = doc.select("a.maxbutton-oxxfile").first()?.attr("href")?.contains("/p/") != true
