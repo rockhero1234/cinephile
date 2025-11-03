@@ -170,10 +170,10 @@ fun Element.extractimg(): String? {
 
 override suspend fun load(url: String): LoadResponse? {
     val doc = app.get(url, cacheTime = 60).document
-
     val title = doc.selectFirst("h1")?.text().orEmpty()
     val dt = doc.select("div.single-mevents-meta").text()
     val dtsplit = dt.split("|")
+    val tvType = if (dtsplit.getOrNull(1)?.trim()?.lowercase() == "film") TvType.Movie else TvType.TvSeries
     val imageUrl = doc.selectFirst("meta[property=og:image]")?.attr("content").orEmpty()
     val plot = doc.selectFirst("p")?.text().orEmpty()
     val year = dtsplit.getOrNull(0)?.trim()?.toIntOrNull()
@@ -196,12 +196,11 @@ override suspend fun load(url: String): LoadResponse? {
         doc.selectFirst("span.single-mevents-platforms-row-date")?.text(),
         doc.selectFirst("img.single-mevents-platforms-row-image")?.attr("alt"),
         doc.selectFirst("span.audiostring")?.text(),
-        dtsplit.getOrNull(1)?.trim(),
         dtsplit.getOrNull(2)?.trim(),
         dtsplit.getOrNull(3)?.trim()
     )
 
-    return newMovieLoadResponse(title, url, TvType.Movie, null) {
+    return newMovieLoadResponse(title, url, tvType, null) {
         this.posterUrl = imageUrl
         this.year = year
         this.plot = plot
