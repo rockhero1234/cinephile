@@ -77,17 +77,17 @@ class Cinevood : MainAPI() {
             backgroundUrl = it.background ?: posterUrl
         }
 
-        val isMovie = doc.select("a.maxbutton-oxxfile").first()?.attr("href")?.contains("/p/") != true
+        val isMovie = doc.select("a[href*='oxxfile']").first()?.attr("href")?.contains("/p/") != true
 
         return if (isMovie) {
-            val links = doc.select("a.maxbutton-oxxfile").mapNotNull { it.attr("href") }.distinct()
+            val links = doc.select("a[href*='oxxfile']").mapNotNull { it.attr("href") }.distinct()
             newMovieLoadResponse(title, url, TvType.Movie, links.toJson()) {
                 this.posterUrl = posterUrl
                 this.backgroundPosterUrl = backgroundUrl
                 this.plot = description
             }
         } else {
-            val linkCollection = doc.select("a.maxbutton-oxxfile").mapNotNull { anchor ->
+            val linkCollection = doc.select("a[href*='oxxfile']").mapNotNull { anchor ->
                 val href = anchor.attr("href")
                 val response = app.get(href.replace("/p/", "/api/packs/")).text
                 val json = JsonParser.parseString(response).asJsonObject
