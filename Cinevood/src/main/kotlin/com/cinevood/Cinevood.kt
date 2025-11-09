@@ -9,7 +9,7 @@ import com.google.gson.JsonParser
 import org.jsoup.nodes.Element
 
 class Cinevood : MainAPI() {
-    override var mainUrl = "https://1cinevood.agency"
+    override var mainUrl = "https://1cinevood.world"
     override var name = "Cinevood"
     override val hasMainPage = true
     override var lang = "hi"
