@@ -63,9 +63,9 @@ class Cinevood : MainAPI() {
         var description = doc.select("span#summary").text().removePrefix("Summary:")
         var posterUrl = doc.select("meta[property^=og:image]").attr("content")
         var backgroundUrl = posterUrl
-
+        val typeString = if (title.lowercase().contains("series")) "series" else "movie"
         val responseData = imdbId?.let { id ->
-            val jsonUrl = "$cinemetaUrl/movie/$id.json"
+            val jsonUrl = "$cinemetaUrl/$typeString/$id.json"
             val jsonText = app.get(jsonUrl).text
             jsonText.takeIf { it.startsWith("{") }?.let { Gson().fromJson(it, ResponseData::class.java) }
         }
