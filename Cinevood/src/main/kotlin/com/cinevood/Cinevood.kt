@@ -7,6 +7,8 @@ import com.lagradost.cloudstream3.utils.AppUtils.tryParseJson
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import org.jsoup.nodes.Element
+import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
+import com.lagradost.cloudstream3.LoadResponse.Companion.addImdbId
 
 class Cinevood : MainAPI() {
     override var mainUrl = "https://1cinevood.world"
@@ -58,7 +60,6 @@ class Cinevood : MainAPI() {
 
         val imdbHref = doc.selectFirst("a[href^=https://www.imdb]")?.attr("href")
         val imdbId = imdbHref?.substringAfter("title/")?.substringBefore("/")?.takeIf { it.isNotBlank() }
-
         var title = doc.selectFirst("meta[property=og:title]")?.attr("content")?.removePrefix("Download ") ?: "Untitled"
         var description = doc.select("span#summary").text().removePrefix("Summary:")
         var posterUrl = doc.select("meta[property^=og:image]").attr("content")
@@ -69,22 +70,38 @@ class Cinevood : MainAPI() {
             val jsonText = app.get(jsonUrl).text
             jsonText.takeIf { it.startsWith("{") }?.let { Gson().fromJson(it, ResponseData::class.java) }
         }
-
+        
+        var cast: List<String> = emptyList()
+        var genre: List<String> = emptyList()
+        var imdbRating: String = ""
+        var year: String = ""
+        
         responseData?.meta?.let {
             title = it.name ?: title
             description = it.description ?: description
             posterUrl = it.poster ?: posterUrl
             backgroundUrl = it.background ?: posterUrl
+            cast = responseData.meta?.cast ?: emptyList()
+            genre = responseData.meta?.genre ?: emptyList()
+            imdbRating = responseData.meta?.imdbRating ?: ""
+            year = responseData.meta?.year ?: ""
         }
 
         val isMovie = doc.select("a[href*='oxxfile']").first()?.attr("href")?.contains("/p/") != true
-
         return if (isMovie) {
-            val links = doc.select("a[href*='oxxfile']").mapNotNull { it.attr("href") }.distinct()
+            var links = doc.select("a[href*='oxxfile']").mapNotNull { it.attr("href") }.distinct()
+            if (links.isEmpty()) {
+                links = doc.select("a[href*='hubcloud']").mapNotNull { it.attr("href") }.distinct()
+            }
             newMovieLoadResponse(title, url, TvType.Movie, links.toJson()) {
                 this.posterUrl = posterUrl
                 this.backgroundPosterUrl = backgroundUrl
                 this.plot = description
+                this.tags = genre
+                this.score = Score.from10(imdbRating)
+                this.year = year.toIntOrNull()
+                addActors(cast)
+                addImdbId(imdbId)
             }
         } else {
             val linkCollection = doc.select("a[href*='oxxfile']").mapNotNull { anchor ->
@@ -121,6 +138,11 @@ class Cinevood : MainAPI() {
                 this.posterUrl = posterUrl
                 this.backgroundPosterUrl = backgroundUrl
                 this.plot = description
+                this.tags = genre
+                this.score = Score.from10(imdbRating)
+                this.year = year.toIntOrNull()
+                addActors(cast)
+                addImdbId(imdbId)
             }
         }
     }
@@ -158,11 +180,27 @@ class Cinevood : MainAPI() {
     }
 
     data class Meta(
+        val id: String?,
+        val imdb_id: String?,
+        val type: String?,
+        val poster: String?,
+        val logo: String?,
+        val background: String?,
+        val moviedb_id: Int?,
         val name: String?,
         val description: String?,
-        val poster: String?,
-        val background: String?
+        val genre: List<String>?,
+        val releaseInfo: String?,
+        val status: String?,
+        val runtime: String?,
+        val cast: List<String>?,
+        val language: String?,
+        val country: String?,
+        val imdbRating: String?,
+        val slug: String?,
+        val year: String?
     )
+
 
     data class ResponseData(val meta: Meta?)
 }
