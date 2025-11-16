@@ -64,9 +64,10 @@ class Cinevood : MainAPI() {
         var description = doc.select("span#summary").text().removePrefix("Summary:")
         var posterUrl = doc.select("meta[property^=og:image]").attr("content")
         var backgroundUrl = posterUrl
-        val typeString = if (title.lowercase().contains("series")) "series" else "movie"
+        val type = if (title.lowercase().contains("series")) TvType.TvSeries else TvType.Movie
         val responseData = imdbId?.let { id ->
-            val jsonUrl = "$cinemetaUrl/$typeString/$id.json"
+            val typeSlug = if (type == TvType.TvSeries) "series" else "movie"
+            val jsonUrl = "$cinemetaUrl/$typeSlug/$id.json"
             val jsonText = app.get(jsonUrl).text
             jsonText.takeIf { it.startsWith("{") }?.let { Gson().fromJson(it, ResponseData::class.java) }
         }
@@ -76,24 +77,34 @@ class Cinevood : MainAPI() {
         var imdbRating: String = ""
         var year: String = ""
         
+        val seasonRegex = Regex("""S\d{2}""", RegexOption.IGNORE_CASE)
+        val seasonMatch = seasonRegex.find(title)
+        val extractedSeason = seasonMatch?.value?.uppercase()
+        
         responseData?.meta?.let {
             title = it.name ?: title
             description = it.description ?: description
             posterUrl = it.poster ?: posterUrl
             backgroundUrl = it.background ?: posterUrl
-            cast = responseData.meta?.cast ?: emptyList()
-            genre = responseData.meta?.genre ?: emptyList()
-            imdbRating = responseData.meta?.imdbRating ?: ""
-            year = responseData.meta?.year ?: ""
+            cast = it.cast ?: emptyList()
+            genre = it.genre ?: emptyList()
+            imdbRating = it.imdbRating ?: ""
+            year = it.year ?: ""
         }
-
-        val isMovie = doc.select("a[href*='oxxfile']").first()?.attr("href")?.contains("/p/") != true
-        return if (isMovie) {
+        
+        if (type == TvType.TvSeries && extractedSeason != null) {
+            if (!title.endsWith(extractedSeason, ignoreCase = true)) {
+                title = "${title.trim()} $extractedSeason"
+            }
+        }
+        
+        val isSingle = doc.select("a[href*='oxxfile']").first()?.attr("href")?.contains("/p/") != true
+        return if (isSingle) {
             var links = doc.select("a[href*='oxxfile']").mapNotNull { it.attr("href") }.distinct()
             if (links.isEmpty()) {
                 links = doc.select("a[href*='hubcloud']").mapNotNull { it.attr("href") }.distinct()
             }
-            newMovieLoadResponse(title, url, TvType.Movie, links.toJson()) {
+            newMovieLoadResponse(title, url,type, links.toJson()) {
                 this.posterUrl = posterUrl
                 this.backgroundPosterUrl = backgroundUrl
                 this.plot = description
@@ -134,7 +145,7 @@ class Cinevood : MainAPI() {
                 }
             }
 
-            newTvSeriesLoadResponse(title, url, TvType.TvSeries, episodes) {
+            newTvSeriesLoadResponse(title, url, type, episodes) {
                 this.posterUrl = posterUrl
                 this.backgroundPosterUrl = backgroundUrl
                 this.plot = description
