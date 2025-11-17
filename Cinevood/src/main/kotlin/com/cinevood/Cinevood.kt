@@ -89,7 +89,7 @@ class Cinevood : MainAPI() {
             cast = it.cast ?: emptyList()
             genre = it.genre ?: emptyList()
             imdbRating = it.imdbRating ?: ""
-            year = it.year ?: ""
+            year = it.releaseInfo ?: ""
         }
         
         if (type == TvType.TvSeries && extractedSeason != null) {
