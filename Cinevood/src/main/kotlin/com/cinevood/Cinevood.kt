@@ -31,6 +31,7 @@ class Cinevood : MainAPI() {
         val imageUrl = post.select("img").attr("src")
         return newMovieSearchResponse(title, url, TvType.Movie) {
             this.posterUrl = imageUrl
+            this.quality=getSearchQuality(title)
         }
     }
 
@@ -188,6 +189,23 @@ class Cinevood : MainAPI() {
         }
 
         return true
+    }
+    private fun getSearchQuality(check: String?): SearchQuality? {
+        val lowercaseCheck = check?.lowercase()
+        if (lowercaseCheck != null) {
+            return when {
+                lowercaseCheck.contains("webrip") || lowercaseCheck.contains("web-dl") -> SearchQuality.WebRip
+                lowercaseCheck.contains("bluray") -> SearchQuality.BlueRay
+                lowercaseCheck.contains("hdts") || lowercaseCheck.contains("hdcam") || lowercaseCheck.contains("hdtc") -> SearchQuality.HdCam
+                lowercaseCheck.contains("dvd") -> SearchQuality.DVD
+                lowercaseCheck.contains("camrip") || lowercaseCheck.contains("rip") -> SearchQuality.CamRip
+                lowercaseCheck.contains("cam") -> SearchQuality.Cam
+                lowercaseCheck.contains("hdrip") || lowercaseCheck.contains("hdtv") -> SearchQuality.HD
+                lowercaseCheck.contains("hq") -> SearchQuality.HQ
+                else -> null
+            }
+        }
+        return null
     }
 
     data class Meta(
