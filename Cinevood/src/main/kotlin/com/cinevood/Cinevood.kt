@@ -65,7 +65,7 @@ class Cinevood : MainAPI() {
         var description = doc.select("span#summary").text().removePrefix("Summary:")
         var posterUrl = doc.select("meta[property^=og:image]").attr("content")
         var backgroundUrl = posterUrl
-        val type = if (title.lowercase().contains("series")) TvType.TvSeries else TvType.Movie
+        val type = if (Regex("(?i)(series|S\\d{2})").containsMatchIn(title)) TvType.TvSeries else TvType.Movie
         val responseData = imdbId?.let { id ->
             val typeSlug = if (type == TvType.TvSeries) "series" else "movie"
             val jsonUrl = "$cinemetaUrl/$typeSlug/$id.json"
