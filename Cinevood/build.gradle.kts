@@ -1,5 +1,5 @@
 // use an integer for version numbers
-version = 8
+version = 9
 cloudstream {
     description ="unstable right now but good regional content"
     authors = listOf("Dilip")
@@ -22,5 +22,5 @@ cloudstream {
     )
     language = "hi"
 
-    iconUrl = "https://1cinevood.agency/wp-content/uploads/2020/07/cvlogo.png"
+    iconUrl = "https://i.ibb.co/nMdxZgkR/8-CM3-5q-ARZYELDWg6-Erqfg-NYpo-Sdh-Yw-HRB5-CMhf-Vgg-Ygn-PMHCVYWQf-EEJMt9gwd6-EFP5t-LYgd-LAm-Zerm-KCX.png"
 }

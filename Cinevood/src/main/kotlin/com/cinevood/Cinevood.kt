@@ -51,9 +51,10 @@ class Cinevood : MainAPI() {
         return newHomePageResponse(request.name, home)
     }
 
-    override suspend fun search(query: String): List<SearchResponse> {
-        val document = app.get("$mainUrl/?s=$query").document
-        return document.select("article.latestpost").mapNotNull { toResult(it) }
+    override suspend fun search(query: String,page:Int): SearchResponseList? {
+        val document = app.get("$mainUrl/page/$page/?s=$query").document
+        val searchResult:List<SearchResponse> = document.select("article.latestpost").mapNotNull { toResult(it) }
+        return searchResult.toNewSearchResponseList()
     }
 
     override suspend fun load(url: String): LoadResponse? {
