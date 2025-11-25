@@ -166,8 +166,6 @@ class Cinevood : MainAPI() {
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
-        if (data.isBlank()) return false
-
         val links = tryParseJson<List<String>>(data)?.filterNot { it.isBlank() }
             ?: data.trim()
                 .removePrefix("[")
@@ -185,7 +183,6 @@ class Cinevood : MainAPI() {
                 val resolved = app.get(apiUrl).url
                 if ("hubcloud." in resolved) resolved else link
             } else link
-
             loadExtractor(finalLink, name, subtitleCallback, callback)
         }
 
