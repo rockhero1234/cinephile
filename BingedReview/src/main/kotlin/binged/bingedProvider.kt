@@ -10,6 +10,7 @@ import com.lagradost.cloudstream3.utils.loadExtractor
 import java.net.URLEncoder
 import org.json.JSONArray
 import org.jsoup.nodes.Element
+import com.lagradost.cloudstream3.LoadResponse.Companion.addImdbUrl
 
 class BingedProvider : MainAPI() {
     override var mainUrl = "https://www.binged.com"
@@ -183,14 +184,14 @@ override suspend fun load(url: String): LoadResponse? {
     val imgelement = it.selectFirst("div.single-castItem-image")
     val img = imgelement?.extractimg()
     val type = it.selectFirst("div.single-castItem-type")?.text()
-    if (name != null) {
-        ActorData(
-                Actor(name, img), roleString = type
-        )       
-    } else {
-        null
-    }
-}.filterNotNull()
+        if (name != null) {
+            ActorData(
+                    Actor(name, img), roleString = type
+            )       
+        } else {
+            null
+        }
+    }.filterNotNull()
     val review = doc.selectFirst("div.our-rating > span.rating-span")?.text() ?: "No Review"
     val tags = listOfNotNull(
         doc.selectFirst("span.single-mevents-platforms-row-date")?.text(),
@@ -199,6 +200,7 @@ override suspend fun load(url: String): LoadResponse? {
         dtsplit.getOrNull(2)?.trim(),
         dtsplit.getOrNull(3)?.trim()
     )
+    val imdbUrl = doc.selectFirst("a.imdb-link")?.attr("href") ?: null
 
     return newMovieLoadResponse(title, url, tvType, null) {
         this.posterUrl = imageUrl
@@ -208,6 +210,7 @@ override suspend fun load(url: String): LoadResponse? {
         this.actors = actors
         addTrailer(trailer)
         this.contentRating = review
+        addImdbUrl(imdbUrl)
     }
 }
 
