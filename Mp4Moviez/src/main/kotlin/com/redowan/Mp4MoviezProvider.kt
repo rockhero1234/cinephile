@@ -17,9 +17,10 @@ import com.lagradost.cloudstream3.utils.Qualities
 import com.lagradost.cloudstream3.utils.loadExtractor
 import com.lagradost.cloudstream3.utils.newExtractorLink
 import org.jsoup.nodes.Element
+import com.lagradost.cloudstream3.fixUrl
 
 class Mp4MoviezProvider : MainAPI() {
-    override var mainUrl = "https://www.mp4moviez.zip"
+    override var mainUrl = "https://www.mp4moviez.ing"
     override var name = "Mp4Moviez"
     override var lang = "hi"
     override val hasMainPage = true
@@ -90,7 +91,7 @@ class Mp4MoviezProvider : MainAPI() {
         val doc = app.get(data).document
         val links = doc.select("div[style=\"text-align:left;\"]")
         links.forEach { item ->
-            val link = item.select("a").attr("href")
+            val link = fixUrl(item.select("a").attr("href"))
             val tag = item.select("b").text() ?: ""
             if (!link.contains("links4mad.online")) {
                 callback.invoke(
@@ -115,8 +116,5 @@ class Mp4MoviezProvider : MainAPI() {
         return true
     }
 
-    private fun getVideoQuality(string: String?): Int {
-        return Regex("(\\d{3,4})[pP]").find(string ?: "")?.groupValues?.getOrNull(1)?.toIntOrNull()
-            ?: Qualities.Unknown.value
-    }
+    private fun getVideoQuality(url: String?) = url?.substringAfter("q=")?.substringBefore("&")?.toIntOrNull() ?: Qualities.Unknown.value
 }
