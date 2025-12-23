@@ -1,5 +1,5 @@
 // use an integer for version numbers
-version = 10
+version = 11
 cloudstream {
     description ="unstable right now but good regional content"
     authors = listOf("Dilip")

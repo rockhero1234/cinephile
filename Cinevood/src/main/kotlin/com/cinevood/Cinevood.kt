@@ -11,7 +11,7 @@ import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.lagradost.cloudstream3.LoadResponse.Companion.addImdbId
 
 class Cinevood : MainAPI() {
-    override var mainUrl = "https://1cinevood.world"
+    override var mainUrl = "https://1cinevood.fyi/"
     override var name = "Cinevood"
     override val hasMainPage = true
     override var lang = "hi"
