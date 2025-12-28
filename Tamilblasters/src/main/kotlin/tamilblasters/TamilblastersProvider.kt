@@ -10,7 +10,7 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 
 class TamilblastersProvider : MainAPI() {
-    override var mainUrl = "https://www.1tamilblasters.world/"
+    override var mainUrl = "https://www.1tamilblasters.business/"
     private val streamhg = "https://tryzendm.com"
     override var name = "Tamilblasters"
     override val supportedTypes = setOf(TvType.Movie, TvType.TvSeries)
