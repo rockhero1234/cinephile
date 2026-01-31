@@ -19,6 +19,24 @@ class BingedProvider : MainAPI() {
     override var lang = "en"
     override val hasMainPage = true
     val invidUrl= "https://invd.cakestwix.com"
+    val headers = mapOf(
+    "accept" to "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+    "accept-language" to "en-US,en;q=0.9",
+    "cache-control" to "no-cache",
+    "pragma" to "no-cache",
+    "priority" to "u=0, i",
+    "sec-ch-ua" to "\"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"144\", \"Brave\";v=\"144\"",
+    "sec-ch-ua-mobile" to "?0",
+    "sec-ch-ua-platform" to "\"Windows\"",
+    "sec-fetch-dest" to "document",
+    "sec-fetch-mode" to "navigate",
+    "sec-fetch-site" to "none",
+    "sec-fetch-user" to "?1",
+    "sec-gpc" to "1",
+    "upgrade-insecure-requests" to "1",
+    "referer" to mainUrl,
+    "user-agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+    )
     private suspend fun getData(titled: String, i: Int, platform: String = "",fltr:String=""): List<MovieSearchResponse> {
         val j = if (i == 1) 0 else 21 + (i - 2) * 20
         var data = mutableMapOf(
@@ -66,7 +84,7 @@ class BingedProvider : MainAPI() {
    
 private suspend fun getWeekendPicks(page:Int): List<SearchResponse> {
     if(page>1) return emptyList()
-    val alllistdoc = app.get("$mainUrl/ranked-lists/").document
+    val alllistdoc = app.get("$mainUrl/ranked-lists/",headers).document
     val latestlist = alllistdoc.selectFirst("div.ranked-lists-row a")?.attr("href") ?: return emptyList()
     val document = app.get("$mainUrl$latestlist").document
     val scriptTags = document.select("script[type='text/lazyscript']")
@@ -170,7 +188,7 @@ fun Element.extractimg(): String? {
 
 
 override suspend fun load(url: String): LoadResponse? {
-    val doc = app.get(url, cacheTime = 60).document
+    val doc = app.get(url,headers,cacheTime = 60).document
     val title = doc.selectFirst("h1")?.text().orEmpty()
     val dt = doc.select("div.single-mevents-meta").text()
     val dtsplit = dt.split("|")
