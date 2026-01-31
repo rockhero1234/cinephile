@@ -86,7 +86,7 @@ private suspend fun getWeekendPicks(page:Int): List<SearchResponse> {
     if(page>1) return emptyList()
     val alllistdoc = app.get("$mainUrl/ranked-lists/",headers).document
     val latestlist = alllistdoc.selectFirst("div.ranked-lists-row a")?.attr("href") ?: return emptyList()
-    val document = app.get("$mainUrl$latestlist").document
+    val document = app.get("$mainUrl$latestlist",headers).document
     val scriptTags = document.select("script[type='text/lazyscript']")
 val targetScript = scriptTags.firstOrNull { it.data().contains("ListFromCookie") }?.data() ?: return emptyList()
 
