@@ -18,17 +18,20 @@ import com.lagradost.cloudstream3.utils.loadExtractor
 import com.lagradost.cloudstream3.utils.newExtractorLink
 import org.jsoup.nodes.Element
 import com.lagradost.cloudstream3.fixUrl
+import java.time.LocalDate
 
 class Mp4MoviezProvider : MainAPI() {
-    override var mainUrl = "https://www.mp4moviez.ing"
+    override var mainUrl = "https://www.mp4moviez.hot"
     override var name = "Mp4Moviez"
     override var lang = "hi"
     override val hasMainPage = true
     override val hasDownloadSupport = true
     override val hasQuickSearch = false
     override val supportedTypes = setOf(TvType.Movie, TvType.TvSeries, TvType.NSFW)
+    val yr = LocalDate.now().year.toString()
     override val mainPage = mainPageOf(
         "" to "Latest Updates",
+        "/365/latest-hot-web-series-($yr).html" to "latest",
         "/88/hot-web-series.html" to "Latest Hindi Hot Web Series",
         "/22/bollywwood-old-movies.html" to "Old Bollywood Movies",
         "/49/hollywood-all-movies.html" to "Hollywood Movies",
