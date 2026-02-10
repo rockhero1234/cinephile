@@ -79,7 +79,7 @@ class Mp4MoviezProvider : MainAPI() {
         val releasedDate =
             "(\\d{4})".toRegex().find(doc.select(".releasedate").text())?.groups?.get(1)?.value
         val link = mainUrl + doc.select("div[style=\"text-align:left;\"] a").attr("href")
-        val actors = document
+        val actors = doc
             .select(".category")[1]
             ?.text()
             ?.split(", &nbsp;")
