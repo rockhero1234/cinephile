@@ -19,6 +19,7 @@ import com.lagradost.cloudstream3.utils.newExtractorLink
 import org.jsoup.nodes.Element
 import com.lagradost.cloudstream3.fixUrl
 import java.time.LocalDate
+import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 
 class Mp4MoviezProvider : MainAPI() {
     override var mainUrl = "https://www.mp4moviez.hot"
@@ -78,10 +79,18 @@ class Mp4MoviezProvider : MainAPI() {
         val releasedDate =
             "(\\d{4})".toRegex().find(doc.select(".releasedate").text())?.groups?.get(1)?.value
         val link = mainUrl + doc.select("div[style=\"text-align:left;\"] a").attr("href")
+        val actors = document
+            .select(".category")[1]
+            ?.text()
+            ?.split(", &nbsp;")
+            ?.map { it.trim() }
+            ?.filter { it.isNotEmpty() }
+            ?: emptyList()
         return newMovieLoadResponse(title, url, TvType.Movie, link) {
             this.posterUrl = imageUrl
             this.plot = plot.trim()
             this.year = releasedDate?.toInt()
+            addActors(actors)
         }
     }
 
